@@ -4,6 +4,7 @@ from django.forms.models import modelformset_factory, BaseModelFormSet
 from django.utils.translation import ugettext_lazy as _
 
 from oscar.core.loading import get_model
+from oscar.apps.catalogue.utils import attribute_widget_factory
 from oscar.forms import widgets
 
 Line = get_model('basket', 'line')
@@ -246,8 +247,8 @@ class AddToBasketForm(forms.Form):
         This is designed to be overridden so that specific widgets can be used
         for certain types of options.
         """
-        kwargs = {'required': option.is_required}
-        self.fields[option.code] = forms.CharField(**kwargs)
+        self.fields[option.code] = \
+            attribute_widget_factory(option.type)(option)
 
 
 class SimpleAddToBasketForm(AddToBasketForm):

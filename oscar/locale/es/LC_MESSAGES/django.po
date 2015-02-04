@@ -5162,7 +5162,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"<div class=\"warning\">%(message)s para optar por la oferta especial <a href="
+"<div class=\"warning\">%(message)s Para optar por la oferta  <a href="
 "\"%(url)s\">%(offer_name)s</a> </div>"
 
 #: templates/oscar/basket/partials/basket_content.html:28

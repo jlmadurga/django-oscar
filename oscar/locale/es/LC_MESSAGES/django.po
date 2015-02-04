@@ -3741,8 +3741,8 @@ msgstr "Condiciones Contar"
 #, python-format
 msgid "Buy %(delta)d more product from %(range)s"
 msgid_plural "Buy %(delta)d more products from %(range)s"
-msgstr[0] "Ha comprado %(delta)d producto que los que se permiten (%(range)s)."
-msgstr[1] "Ha comprado %(delta)d producto que los que se permiten %(range)s."
+msgstr[0] "Compra %(delta)d producto más de (%(range)s)."
+msgstr[1] "Compra %(delta)d productos más de %(range)s."
 
 #: apps/offer/models.py:1005
 #, python-format

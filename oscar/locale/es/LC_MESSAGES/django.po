@@ -4345,7 +4345,7 @@ msgstr ""
 #: apps/partner/availability.py:89
 #, python-format
 msgid "a maximum of %(max)d can be bought"
-msgstr ""
+msgstr "como máximo puedes comprar %(max)d"
 
 #: apps/partner/availability.py:103
 msgid "In stock"

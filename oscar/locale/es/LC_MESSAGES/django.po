@@ -321,7 +321,7 @@ msgstr "Apellidos"
 
 #: apps/address/abstract_models.py:220
 msgid "First line of address"
-msgstr "Primer línea de la dirección"
+msgstr "Dirección"
 
 #: apps/address/abstract_models.py:222
 msgid "Second line of address"

@@ -120,7 +120,7 @@ class AbstractStockRecord(models.Model):
     """
     product = models.ForeignKey(
         'catalogue.Product', related_name="stockrecords",
-        verbose_name=_("Product"))
+        verbose_name=_("Product"), on_delete=models.SET_NULL)
     partner = models.ForeignKey(
         'partner.Partner', verbose_name=_("Partner"),
         related_name='stockrecords')

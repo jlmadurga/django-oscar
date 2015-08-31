@@ -23,7 +23,6 @@ from oscar.core.utils import slugify
 from oscar.core.loading import get_classes, get_model
 from oscar.models.fields import NullCharField, AutoSlugField
 from django.contrib.contenttypes.generic import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 
 ProductManager, BrowsableProductManager = get_classes(
     'catalogue.managers', ['ProductManager', 'BrowsableProductManager'])

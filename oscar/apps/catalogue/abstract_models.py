@@ -22,6 +22,7 @@ from treebeard.mp_tree import MP_Node
 from oscar.core.utils import slugify
 from oscar.core.loading import get_classes, get_model
 from oscar.models.fields import NullCharField, AutoSlugField
+from django.contrib.contenttypes.generic import GenericForeignKey
 
 ProductManager, BrowsableProductManager = get_classes(
     'catalogue.managers', ['ProductManager', 'BrowsableProductManager'])
@@ -846,15 +847,20 @@ class AbstractProductAttributeValue(models.Model):
     value_option = models.ForeignKey(
         'catalogue.AttributeOption', blank=True, null=True,
         verbose_name=_("Value Option"))
-    value_entity = models.ForeignKey(
-        'catalogue.AttributeEntity', blank=True, null=True,
-        verbose_name=_("Value Entity"))
     value_file = models.FileField(
         upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255,
         blank=True, null=True)
     value_image = models.ImageField(
         upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255,
         blank=True, null=True)
+    
+    value_entity = GenericForeignKey(
+        'entity_content_type', 'entity_object_id')
+
+    entity_content_type = models.ForeignKey(
+        ContentType, null=True, blank=True, editable=False)
+    entity_object_id = models.PositiveIntegerField(
+        null=True, blank=True, editable=False)
 
     def _get_value(self):
         return getattr(self, 'value_%s' % self.attribute.type)

@@ -69,7 +69,7 @@ class OptionFactory(factory.DjangoModelFactory):
 
     name = 'example option'
     code = 'example'
-    type = Meta.model.OPTIONAL
+
 
 
 class AttributeOptionFactory(factory.DjangoModelFactory):

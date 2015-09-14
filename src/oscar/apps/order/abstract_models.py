@@ -559,7 +559,7 @@ class AbstractLine(models.Model):
         desc = self.title
         ops = []
         for attribute in self.attributes.all():
-            ops.append("%s = '%s'" % (attribute.type, attribute.value))
+            ops.append("%s" % (attribute.value))
         if ops:
             desc = "%s (%s)" % (desc, ", ".join(ops))
         return desc

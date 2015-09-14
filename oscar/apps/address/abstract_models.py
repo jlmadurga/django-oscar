@@ -425,8 +425,7 @@ class AbstractShippingAddress(AbstractAddress):
     it should be read-only after that.
     """
     phone_number = PhoneNumberField(
-        _("Phone number"), blank=True,
-        help_text=_("In case we need to call you about your order"))
+        _("Phone number"))
     notes = models.TextField(
         blank=True, verbose_name=_('Instructions'),
         help_text=_("Tell us anything we should know when delivering "

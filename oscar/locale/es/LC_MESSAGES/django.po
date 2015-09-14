@@ -431,7 +431,7 @@ msgstr "Instrucciones"
 
 #: apps/address/abstract_models.py:432
 msgid "Tell us anything we should know when delivering your order."
-msgstr "Díganos cualquiera cosa que debamos saber para entregar su pedido."
+msgstr "Observaciones de su pedido."
 
 #: apps/address/abstract_models.py:437
 #: templates/oscar/checkout/shipping_address.html:5

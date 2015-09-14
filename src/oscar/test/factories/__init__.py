@@ -39,7 +39,7 @@ ConditionalOffer = get_model('offer', 'ConditionalOffer')
 
 WeightBand = get_model('shipping', 'WeightBand')
 WeightBased = get_model('shipping', 'WeightBased')
-
+Option = get_model('catalogue', 'Option')
 
 def create_stockrecord(product=None, price_excl_tax=None, partner_sku=None,
                        num_in_stock=None, partner_name=None,
@@ -237,3 +237,8 @@ def create_shipping_weight_band(upper_limit, charge, weight_based=None):
         upper_limit=upper_limit,
         charge=charge
     )
+
+def create_option(name="weight", type="float", required=False):
+    option = Option.objects.create(name=name, type=type, required=required)
+    return option
+    

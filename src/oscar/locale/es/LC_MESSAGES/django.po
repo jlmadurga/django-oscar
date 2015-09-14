@@ -80,7 +80,7 @@ msgstr "Apellidos"
 
 #: apps/address/abstract_models.py:225
 msgid "First line of address"
-msgstr "Primer línea de la dirección"
+msgstr "Dirección"
 
 #: apps/address/abstract_models.py:227
 msgid "Second line of address"
@@ -190,7 +190,7 @@ msgstr "Instrucciones"
 
 #: apps/address/abstract_models.py:460
 msgid "Tell us anything we should know when delivering your order."
-msgstr "Díganos cualquiera cosa que debamos saber para entregar su pedido."
+msgstr "Observaciones de su pedido."
 
 #: apps/address/abstract_models.py:467
 #: templates/oscar/checkout/shipping_address.html:5
@@ -3841,8 +3841,8 @@ msgstr "Condiciones por número de artículos"
 #, python-format
 msgid "Buy %(delta)d more product from %(range)s"
 msgid_plural "Buy %(delta)d more products from %(range)s"
-msgstr[0] "Ha comprado %(delta)d producto que los que se permiten (%(range)s)."
-msgstr[1] "Compre %(delta)d productos más de %(range)s."
+msgstr[0] "Compra %(delta)d producto más de (%(range)s)."
+msgstr[1] "Compra %(delta)d productos más de %(range)s."
 
 #: apps/offer/conditions.py:111
 #, python-format
@@ -4347,7 +4347,7 @@ msgstr "no hay stock"
 #: apps/partner/availability.py:89
 #, python-format
 msgid "a maximum of %(max)d can be bought"
-msgstr "se puede comprar un máximo de %(max)d"
+msgstr "como máximo puedes comprar %(max)d"
 
 #: apps/partner/availability.py:103
 msgid "In stock"
@@ -5285,7 +5285,7 @@ msgid ""
 "\n"
 "                <div class=\"warning\">%(message)s to qualify for the <a href=\"%(url)s\">%(offer_name)s</a> special offer</div>\n"
 "            "
-msgstr "\n<div class=\"warning\">%(message)s para optar por la oferta especial <a href=\"%(url)s\">%(offer_name)s</a> </div>"
+msgstr "\n<div class=\"warning\">%(message)s Para optar por la oferta <a href=\"%(url)s\">%(offer_name)s</a> </div>"
 
 #: templates/oscar/basket/partials/basket_content.html:29
 msgid "Items to buy now"

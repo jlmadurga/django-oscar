@@ -827,7 +827,7 @@ msgstr "No puedes guardar un item para luego si aun no te has registrado!"
 #: apps/basket/views.py:281
 msgid ""
 "Your basket couldn't be updated. Please correct any validation errors below."
-msgstr ""
+msgstr "No se ha podido actualizar tu carrito. Corrige los errores que aparecen debajo."
 
 #: apps/basket/views.py:369
 #, python-format

@@ -313,7 +313,7 @@ class AbstractProduct(models.Model):
 
     # Denormalised product rating - used by reviews app.
     # Product has no ratings if rating is None
-    rating = models.FloatField(_('Rating'), null=True, editable=False)
+    rating = models.FloatField(_('Rating'), null=True)
 
     date_created = models.DateTimeField(_("Date created"), auto_now_add=True)
 

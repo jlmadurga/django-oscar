@@ -279,7 +279,8 @@ class MultibuyDiscountBenefit(Benefit):
 class ShippingBenefit(Benefit):
 
     def apply(self, basket, condition, offer):
-        condition.consume_items(offer, basket, affected_lines=())
+        # Do not consume any line as it is only shipping discount
+        #condition.consume_items(offer, basket, affected_lines=())
         return results.SHIPPING_DISCOUNT
 
     class Meta:

@@ -280,7 +280,7 @@ class ShippingBenefit(Benefit):
 
     def apply(self, basket, condition, offer):
         # Do not consume any line as it is only shipping discount
-        condition.consume_items(offer, basket, affected_lines=())
+        #condition.consume_items(offer, basket, affected_lines=())
         return results.SHIPPING_DISCOUNT
 
     class Meta:

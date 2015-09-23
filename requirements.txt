@@ -1,7 +1,7 @@
 # You can check for newer versions of these dependencies using this command
 #
 # $ for x in `yolk -l | awk '{print $1}'`; do yolk -d $x 2>/dev/null; done
-
+django==1.6.8
 # Development
 django-debug-toolbar==1.2.2
 django-debug-toolbar-template-timings==0.6.4

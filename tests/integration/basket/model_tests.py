@@ -14,14 +14,23 @@ class TestAddingAProductToABasket(TestCase):
         self.basket = Basket()
         self.basket.strategy = strategy.Default()
         self.product = factories.create_product()
+        self.option = factories.create_option()
+        self.product.product_options.add(self.option)
         self.record = factories.create_stockrecord(
             currency='GBP',
             product=self.product, price_excl_tax=D('10.00'))
         self.purchase_info = factories.create_purchase_info(self.record)
-        self.basket.add(self.product)
+        self.basket.add(self.product, options=[{'option': self.option, 'value': 12.0}])
 
     def test_creates_a_line(self):
         self.assertEqual(1, self.basket.num_lines)
+    
+    def test_creates_line_attribute(self):
+        line = self.basket.lines.all()[0]
+        self.assertEqual(1, len(line.attributes.all()))
+        line_attribute = line.attributes.all()[0]
+        self.assertEqual(self.option, line_attribute.option)
+        self.assertEqual(12.0, line_attribute.value)
 
     def test_sets_line_prices(self):
         line = self.basket.lines.all()[0]

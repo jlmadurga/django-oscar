@@ -26,7 +26,7 @@ ProductClass = get_model('catalogue', 'ProductClass')
 ProductAttribute = get_model('catalogue', 'ProductAttribute')
 ProductAttributeValue = get_model('catalogue', 'ProductAttributeValue')
 ProductImage = get_model('catalogue', 'ProductImage')
-
+Option = get_model('catalogue', 'Option')
 
 def create_stockrecord(product=None, price_excl_tax=None, partner_sku=None,
                        num_in_stock=None, partner_name=None,
@@ -208,3 +208,8 @@ def create_voucher():
         end_datetime=timezone.now() + datetime.timedelta(days=12))
     voucher.offers.add(create_offer(offer_type='Voucher'))
     return voucher
+
+def create_option(name="weight", type="float", required=False):
+    option = Option.objects.create(name=name, type=type, required=required)
+    return option
+    

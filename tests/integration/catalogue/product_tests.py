@@ -8,11 +8,12 @@ from oscar.test import factories
 
 from oscar.apps.catalogue.models import (Product, ProductClass,
                                          ProductAttribute,
-                                         AttributeOptionGroup,
                                          AttributeOption,
+                                         AttributeOptionGroup,
                                          Option)
+from oscar.test import factories
+from oscar.test.decorators import ignore_deprecation_warnings
 from oscar.apps.catalogue.utils import attribute_widget_factory
-
 
 
 class ProductTests(TestCase):
@@ -170,7 +171,6 @@ class ProductAttributeCreationTests(TestCase):
 
         self.assertEqual(attribute_value.value, unrelated_object)
 
-        
 # class OptionCreationTests(TestCase):
 #     
 #     def test_validating_options(self):
@@ -248,4 +248,4 @@ class ProductAttributeCreationTests(TestCase):
 #                  
 #     def test_image(self):
 #         self.assertTrue(isinstance(self._test_widget("image"), forms.ImageField))
->>>>>>> feature/enhance_options_0.7
+

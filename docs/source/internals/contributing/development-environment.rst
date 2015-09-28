@@ -43,7 +43,7 @@ against::
 Writing LESS/CSS
 ----------------
 
-Oscar's CSS files are built using LESS_.  However, the sandbox defaults to
+Oscar's CSS files are built using LESS_ V1.  However, the sandbox defaults to
 serving CSS files directly, bypassing LESS compilation.
 
 .. _LESS: http://lesscss.org/
@@ -58,7 +58,7 @@ in ``sites/sandbox/settings_local.py``.  This will cause Oscar to use
 work, you will need to ensure that the LESS compiler ``lessc`` is installed.
 Using npm, install LESS using::
 
-    npm install less
+    npm install less@'<2.0.0'
 
 .. _`django-compressor`: http://django_compressor.readthedocs.org/en/latest/
 
@@ -71,64 +71,17 @@ You can manually compile the CSS files by running::
     If you do submit a pull request that changes the LESS files.  Please also
     recompile the CSS files and include them in your pull request.
 
-Vagrant
-=======
-
-Oscar ships with a Vagrant_ virtual machine that can be used to test integration
-with various services in a controlled environment.  For instance, it is used to
-test that the migrations run correctly in both MySQL and Postgres.
-
-.. _Vagrant: http://vagrantup.com/
-
-Building the Vagrant machine
-----------------------------
-
-To create the machine, first ensure that Vagrant and puppet_ are installed.  You will require a
-puppet version that supports ``puppet module install``, that is > 2.7.14.  Now
-run::
-
-    make puppet
-
-.. _puppet: http://docs.puppetlabs.com/guides/installation.html
-
-to fetch the required puppet modules for provisioning.  Finally, run::
-
-    vagrant up
-
-to create the virtual machine and provision it.
-
 Testing migrations against MySQL and Postgres
 ---------------------------------------------
 
-To test the migrations against MySQL and Postgres, do the following:
+To test the migrations against MySQL and Postgres you will need to set
+up an environment with both installed and do the following:
 
-1. SSH onto the VM::
+1. Change to sandbox folder and activate your virtualenv
 
-    vagrant ssh
-
-2. Change to sandbox folder and activate virtualenv::
-
-    cd /vagrant/sites/sandbox
-    source /var/www/virtualenv/bin/activate
-
-3. Run helper script::
+2. Run helper script::
 
     ./test_migrations.sh
 
     This will recreate the Oscar database in both MySQL and Postgres and rebuild
-    it using ``syncdb`` and ``migrate``.
-
-Testing WSGI server configurations
-----------------------------------
-
-You can browse the Oscar sandbox site with different deployment setups. Just
-open up http://localhost:808x on your host machine.
-
-* Django's development server runs on port 8080.
-
-* The Vagrant machine runs Apache2 and mod_wsgi on port 8081.
-
-* Nginx acts as a reverse proxy to Apache on port 8082.
-
-* Nginx acts as a reverse proxy to gunicorn on port 8083.
-
+    it using ``migrate``.

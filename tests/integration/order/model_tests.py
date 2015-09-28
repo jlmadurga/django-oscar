@@ -11,13 +11,11 @@ from oscar.apps.order.exceptions import (
 from oscar.apps.order.models import (
     Order, Line, ShippingEvent, ShippingEventType, ShippingEventQuantity,
     OrderNote, OrderDiscount)
+from oscar.test.basket import add_product
 from oscar.test.factories import (
-    create_order, create_offer, create_voucher, create_basket)
-from oscar.test.newfactories import (
+    create_order, create_offer, create_voucher, create_basket,
     OrderFactory, OrderLineFactory, ShippingAddressFactory,
     ShippingEventFactory)
-
-from oscar.test.basket import add_product
 
 ORDER_PLACED = 'order_placed'
 
@@ -332,6 +330,34 @@ class TestOrderDiscount(TestCase):
 
         self.assertEqual(discount.description(), voucher.code)
 
+
+class OrderTests(TestCase):
+    def get_date_tuple(self, date=None):
+        """
+        Returns a tuple like (year, month, day, hour, minute) for
+        datetime comparisons.
+        We probably don't want to assert datetime objects have the same
+        number of miliseconds etc. just in case the object in the test
+        differs by some insignificant amount.
+        """
+        if date is None:
+            date = timezone.now()
+        return date.timetuple()[:-4]
+
+    def test_sets_date_placed_to_now_by_default(self):
+        order = create_order(number='100003')
+        self.assertTupleEqual(self.get_date_tuple(order.date_placed),
+                              self.get_date_tuple())
+
+    def test_allows_date_placed_to_be_changed_and_set_explicitly(self):
+        order = create_order(number='100003')
+        tzinfo = timezone.get_current_timezone()
+        order.date_placed = datetime(2012, 8, 11, 16, 14, tzinfo=tzinfo)
+        order.save()
+
+        self.assertTupleEqual(self.get_date_tuple(order.date_placed),
+                              (2012, 8, 11, 16, 14))
+
     def test_shipping_status(self):
         order = OrderFactory()
 
@@ -362,31 +388,3 @@ class TestOrderDiscount(TestCase):
         # Set second line to returned
         event_2.line_quantities.create(line=line_2, quantity=1)
         self.assertEqual(order.shipping_status, _('Returned'))
-
-
-class OrderTests(TestCase):
-    def get_date_tuple(self, date=None):
-        """
-        Returns a tuple like (year, month, day, hour, minute) for
-        datetime comparisons.
-        We probably don't want to assert datetime objects have the same
-        number of miliseconds etc. just in case the object in the test
-        differs by some insignificant amount.
-        """
-        if date is None:
-            date = timezone.now()
-        return date.timetuple()[:-4]
-
-    def test_sets_date_placed_to_now_by_default(self):
-        order = create_order(number='100003')
-        self.assertTupleEqual(self.get_date_tuple(order.date_placed),
-                              self.get_date_tuple())
-
-    def test_allows_date_placed_to_be_changed_and_set_explicitly(self):
-        order = create_order(number='100003')
-        tzinfo = timezone.get_current_timezone()
-        order.date_placed = datetime(2012, 8, 11, 16, 14, tzinfo=tzinfo)
-        order.save()
-
-        self.assertTupleEqual(self.get_date_tuple(order.date_placed),
-                              (2012, 8, 11, 16, 14))

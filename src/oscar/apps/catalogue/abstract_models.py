@@ -797,6 +797,7 @@ class AbstractProductAttribute(models.Model):
     RICHTEXT = "richtext"
     DATE = "date"
     OPTION = "option"
+    MULTI_OPTION = "multi_option"
     ENTITY = "entity"
     FILE = "file"
     IMAGE = "image"
@@ -808,6 +809,7 @@ class AbstractProductAttribute(models.Model):
         (RICHTEXT, _("Rich Text")),
         (DATE, _("Date")),
         (OPTION, _("Option")),
+        (MULTI_OPTION, _("Multi Option")),
         (ENTITY, _("Entity")),
         (FILE, _("File")),
         (IMAGE, _("Image")),
@@ -921,6 +923,13 @@ class AbstractProductAttribute(models.Model):
             raise ValidationError(
                 _("%(enum)s is not a valid choice for %(attr)s") %
                 {'enum': value, 'attr': self})
+            
+    def _validate_multi_option(self, value):
+        if not isinstance(value, QuerySet):
+            raise ValidationError(
+                                 _("Must be a list of AttributeOption model object instance"))
+        for attribute_option in value:
+            self._validate_option(attribute_option)
 
     def _validate_file(self, value):
         if value and not isinstance(value, File):
@@ -952,6 +961,10 @@ class AbstractProductAttributeValue(models.Model):
     value_option = models.ForeignKey(
         'catalogue.AttributeOption', blank=True, null=True,
         verbose_name=_("Value option"))
+    value_multi_option = models.ManyToManyField('catalogue.AttributeOption',
+                                     blank=True, 
+                                     verbose_name=_("Value options"),
+                                     related_name='attribute_value_options')
     value_file = models.FileField(
         upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255,
         blank=True, null=True)
@@ -1102,6 +1115,7 @@ class AbstractOption(models.Model):
     RICHTEXT = "richtext"
     DATE = "date"
     OPTION = "option"
+    MULTI_OPTION = "multi_option"
     ENTITY = "entity"
     FILE = "file"
     IMAGE = "image"
@@ -1113,6 +1127,7 @@ class AbstractOption(models.Model):
         (RICHTEXT, _("Rich Text")),
         (DATE, _("Date")),
         (OPTION, _("Option")),
+        (MULTI_OPTION, _("Multi Option")),
         (ENTITY, _("Entity")),
         (FILE, _("File")),
         (IMAGE, _("Image")),
@@ -1196,6 +1211,13 @@ class AbstractOption(models.Model):
             raise ValidationError(
                 _("%(enum)s is not a valid choice for %(attr)s") %
                 {'enum': value, 'attr': self})
+            
+    def _validate_multi_option(self, value):
+        if not instance(value, list):
+            raise ValidationError(
+                                 _("Must be a list of AttributeOption model object instance"))
+        for attribute_option in value:
+            self._validate_option(attribute_option)
 
     def _validate_file(self, value):
         if value and not isinstance(value, File):

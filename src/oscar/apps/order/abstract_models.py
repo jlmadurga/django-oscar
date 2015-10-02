@@ -742,6 +742,10 @@ class AbstractLineAttribute(models.Model):
     value_option = models.ForeignKey('catalogue.AttributeOption', blank=True,
                                      null=True, verbose_name=_("Value option"),
                                      related_name='order_value_option')
+    value_multi_option = models.ManyToManyField('catalogue.AttributeOption',
+                                     blank=True, 
+                                     verbose_name=_("Value options"),
+                                     related_name='order_value_options')
     value_file = models.FileField(
         upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255,
         blank=True, null=True)

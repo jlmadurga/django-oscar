@@ -853,6 +853,10 @@ class AbstractLineAttribute(models.Model):
                                      blank=True, null=True,
                                      verbose_name=_("Value option"),
                                      related_name='basket_value_option')
+    value_multi_option = models.ManyToManyField('catalogue.AttributeOption',
+                                     blank=True,
+                                     verbose_name=_("Value options"),
+                                     related_name='basket_value_options')
     value_file = models.FileField(
         upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255,
         blank=True, null=True)

@@ -801,6 +801,7 @@ class AbstractProductAttribute(models.Model):
     ENTITY = "entity"
     FILE = "file"
     IMAGE = "image"
+    EMAIL = "email"
     TYPE_CHOICES = (
         (TEXT, _("Text")),
         (INTEGER, _("Integer")),
@@ -813,6 +814,7 @@ class AbstractProductAttribute(models.Model):
         (ENTITY, _("Entity")),
         (FILE, _("File")),
         (IMAGE, _("Image")),
+        (EMAIL, _("Email")),
     )
     type = models.CharField(
         choices=TYPE_CHOICES, default=TYPE_CHOICES[0][0],
@@ -886,7 +888,8 @@ class AbstractProductAttribute(models.Model):
         if not isinstance(value, six.string_types):
             raise ValidationError(_("Must be str or unicode"))
     _validate_richtext = _validate_text
-
+    _validate_email = _validate_text
+    
     def _validate_float(self, value):
         try:
             float(value)
@@ -935,6 +938,7 @@ class AbstractProductAttribute(models.Model):
         if value and not isinstance(value, File):
             raise ValidationError(_("Must be a file field"))
     _validate_image = _validate_file
+        
 
 
 @python_2_unicode_compatible
@@ -1119,6 +1123,7 @@ class AbstractOption(models.Model):
     ENTITY = "entity"
     FILE = "file"
     IMAGE = "image"
+    EMAIL = "email"
     TYPE_CHOICES = (
         (TEXT, _("Text")),
         (INTEGER, _("Integer")),
@@ -1131,6 +1136,7 @@ class AbstractOption(models.Model):
         (ENTITY, _("Entity")),
         (FILE, _("File")),
         (IMAGE, _("Image")),
+        (EMAIL, _("Email")),
    )
  
     type = models.CharField(
@@ -1174,7 +1180,8 @@ class AbstractOption(models.Model):
         if not isinstance(value, six.string_types):
             raise ValidationError(_("Must be str or unicode"))
     _validate_richtext = _validate_text
-
+    _validate_email = _validate_text
+    
     def _validate_float(self, value):
         try:
             float(value)

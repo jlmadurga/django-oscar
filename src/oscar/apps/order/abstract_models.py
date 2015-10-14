@@ -739,6 +739,7 @@ class AbstractLineAttribute(models.Model):
     value_float = models.FloatField(_('Float'), blank=True, null=True)
     value_richtext = models.TextField(_('Richtext'), blank=True, null=True)
     value_date = models.DateField(_('Date'), blank=True, null=True)
+    value_email = models.EmailField(_("eMail"), blank=True, null=True)
     value_option = models.ForeignKey('catalogue.AttributeOption', blank=True,
                                      null=True, verbose_name=_("Value option"),
                                      related_name='order_value_option')
